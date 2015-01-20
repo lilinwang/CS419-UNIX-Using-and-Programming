@@ -1,0 +1,48 @@
+#/usr/bin/perl
+sub plus{
+  $tem=0;
+  if ($_[0]>$_[1]) {$tem=$_[0];} else {$tem=$_[1];}
+  $tem;
+}
+
+sub ok{
+  $tem=0;
+  if ($_[0]eq'+' || $_[0]eq'-' || ord($_[0])<58&&ord($_[0])>47) {
+    $tem=0;} else {$tem=1;}
+  $tem;
+}
+print "NOTE1: Numbers in your file can be seperated by nondigital chars not included in {'-','+'}\n";
+print "NOTE2: Enter \"exit\" to exit!\n";
+print "Please enter the filename:";
+chomp($ma=<STDIN>);
+my $flag=1;
+while ($ma ne "exit") {
+  my $max=-999999;
+  open(file,$ma)|| ($flag=0);
+  if ($flag==0) {print"Could not open file\n";} else
+{
+  while ($line=<file>){
+    @array=split(//,$line);
+    #print $line."\n";
+    $num=length($line);my $sgn=1;my $tem=0;
+    for ($i=0;$i<$num;$i++){
+      if (&ok($array[$i])==1) {
+        $max=&plus($max,$tem*$sgn);$sgn=1;$tem=0;
+        #print $max."\n";
+      } else {
+        #print $array[$i].' '.$i.' '.$tem."\n";
+        if ($array[$i] eq '-'){$sgn=-1;}
+        elsif ($array[$i] eq '+'){}
+        else {$tem=$tem*10+ord($array[$i])-48;
+        #print $array[$i].' '.$i.' '.$tem.' '.$max."\n";
+        }
+      };
+    };
+  }
+ 
+  close(file);
+  print "The biggest number in your list is:".$max."\n";
+}
+  print "Please enter the filename:";
+  chomp($ma=<STDIN>);
+}

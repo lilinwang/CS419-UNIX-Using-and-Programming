@@ -1,0 +1,46 @@
+#! /bin/bash
+funa(){
+  echo "Please input the integer parameter \"num\":"
+  read num
+  echo "Please input the ran_file name:"
+  read ran_file
+  for ((i=0;i<num;i++))
+  do
+    echo $RANDOM 
+  done >$ran_file
+}
+funb()
+{
+  echo "Please input the integer parameter \"n\"(smaller than \"num\"):"
+  read n
+  for ((i=0;i<n;i++))
+  do
+    read line
+    num_array[$i]=$line
+  done <$ran_file
+}
+
+func(){
+  echo "Please input the out_file name:"
+  read out_file
+  for ((i=n;i>0;i--))
+  do
+    for ((j=0;j<i-1;j++))
+    do  
+      if [ ${num_array[$j]} -lt ${num_array[ $j+1 ]} ]
+      then
+         t=${num_array[$j]}
+         num_array[$j]=${num_array[$j+1]}
+         num_array[$j+1]=$t
+      fi
+    done
+  done 
+  for ((i=0;i<n;i++)) 
+  do 
+    echo ${num_array[$i]} 
+  done > $out_file
+}
+funa
+funb
+func
+

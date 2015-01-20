@@ -1,0 +1,42 @@
+#! /bin/bash
+echo "Input \"exit\" to exit"
+echo "Please choose the type of calculate:"
+echo "\"1\" represents \"+\";\"2\" represents \"-\";\"3\" represents \"*\";\"4\" represents \"/\""
+read c
+while [ $c != "exit" ]
+do 
+  a=$RANDOM
+  b=$RANDOM
+  echo "THe first number is:$a"
+  echo "THe second number is:$b"
+  if [ $c = "1" ]
+  then 
+    ((ans=$a+$b))
+  elif [ $c = "2" ]
+  then 
+    ((ans=$a-$b))
+  elif  [ $c = "3" ]
+  then 
+    ((ans=$a*$b))
+  elif  [ $c = "4" ]
+  then 
+    ((ans=$a/$b))
+  else 
+    echo "The input is illegal!Please input again:"
+    read c
+    continue
+  fi
+  echo "Please input the answer:"
+  read d
+  if [ $d -eq $ans ]
+  then
+    echo "Congradulation! The answer is correct!"
+  else
+    echo "Sorry.The answer is wrong, the correct answer is:$ans"
+  fi
+  echo
+  echo "Input \"exit\" to exit"
+  echo "Please choose the type of calculate:"
+  echo "\"1\" represents \"+\";\"2\" represents \"-\";\"3\" represents \"*\";\"4\" represents \"/\""
+  read c
+done
